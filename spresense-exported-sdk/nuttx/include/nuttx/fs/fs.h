@@ -814,7 +814,7 @@ int fs_dupfd2(int fd1, int fd2);
  *
  ****************************************************************************/
 
-int file_open(FAR struct file *filep, FAR const char *path, int oflags, ...);
+// int file_open(FAR struct file *filep, FAR const char *path, int oflags, ...);
 
 /****************************************************************************
  * Name: file_detach

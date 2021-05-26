@@ -1,7 +1,7 @@
 /****************************************************************************
- * include/nuttx/video/isx012.h
+ * tools/cxd56/clefia.h
  *
- *   Copyright 2018 Sony Semiconductor Solutions Corporation
+ * Copyright (C) 2007, 2008 Sony Corporation
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -13,10 +13,9 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 3. Neither the name of Sony Semiconductor Solutions Corporation nor
- *    the names of its contributors may be used to endorse or promote
- *    products derived from this software without specific prior written
- *    permission.
+ * 3. Neither the name NuttX nor the names of its contributors may be
+ *    used to endorse or promote products derived from this software
+ *    without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -30,45 +29,37 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- *
- ****************************************************************************/
+ *****************************************************************************/
 
-#ifndef __INCLUDE_NUTTX_VIDEO_ISX012_H
-#define __INCLUDE_NUTTX_VIDEO_ISX012_H
-
-/****************************************************************************
- * Included Files
- ****************************************************************************/
-
-/****************************************************************************
- * Pre-processor Definitions
- ****************************************************************************/
+#ifndef _TOOLS_CXD56_CLEFIA_H_
+#define _TOOLS_CXD56_CLEFIA_H_
 
 /****************************************************************************
  * Public Types
  ****************************************************************************/
 
-/****************************************************************************
- * Public Data
- ****************************************************************************/
-
-#ifdef __cplusplus
-#define EXTERN extern "C"
-extern "C"
+struct cipher
 {
-#else
-#define EXTERN extern
-#endif
+    int mode;
+    int dir;
+    uint8_t rk[8 * 26 + 16];
+    uint8_t vector[16];
+    int round;
+    uint8_t k1[16];
+    uint8_t k2[16];
+};
 
 /****************************************************************************
  * Public Function Prototypes
  ****************************************************************************/
-FAR struct video_devops_s *isx012_initialize(void);
-int isx012_uninitialize(void);
 
-#undef EXTERN
-#ifdef __cplusplus
-}
+struct cipher *cipher_init(uint8_t *key, uint8_t *iv);
+void cipher_deinit(struct cipher *c);
+int cipher_calc_cmac(struct cipher *c, void *data, int size, void *cmac);
+void bytexor(unsigned char *dst, const unsigned char *a,
+    const unsigned char *b, int bytelen);
+int clefiakeyset(unsigned char *rk, const unsigned char *skey);
+void clefiaencrypt(unsigned char *ct, const unsigned char *pt,
+    const unsigned char *rk, const int r);
+
 #endif
-
-#endif /* __INCLUDE_NUTTX_VIDEO_ISX012_H */

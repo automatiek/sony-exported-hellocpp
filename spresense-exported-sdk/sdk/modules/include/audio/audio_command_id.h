@@ -388,10 +388,9 @@
 
 #define AUDCMD_SETRENDERINGCLK  (AUDCMD_CATEGORY_BASEBAND | 0x0c)
 
-/*! \brief Command Code: InitSpDrvMode */
+/*! \brief Command Code: SetSpDrvMode */
 
-#define AUDCMD_INITSPDRVMODE     (AUDCMD_CATEGORY_BASEBAND | 0x0d)
-#define AUDCMD_SETSPDRVMODE      (AUDCMD_INITSPDRVMODE) /* old command name */
+#define AUDCMD_SETSPDRVMODE     (AUDCMD_CATEGORY_BASEBAND | 0x0d)
 
 /*! \brief Command Code: SetMicMap */
 
@@ -466,10 +465,9 @@
 
 #define AUDRLT_SETRENDERINGCLKCMPLT     AUDCMD_SETRENDERINGCLK
 
-/*! \brief Result Code: InitSpDrvModeCmplt */
+/*! \brief Result Code: SetSpDrvModeCmplt */
 
-#define AUDRLT_INITSPDRVMODECMPLT        AUDCMD_INITSPDRVMODE
-#define AUDRLT_SETSPDRVMODECMPLT         AUDRLT_INITSPDRVMODECMPLT /* old result code */
+#define AUDRLT_SETSPDRVMODECMPLT        AUDCMD_SETSPDRVMODE
 
 /** @} */
 

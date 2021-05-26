@@ -291,7 +291,7 @@ enum altcom_sms_msg_chset_e
 
   ALTCOM_SMS_MSG_CHSET_UCS2,
 
-  /** Reserved for extension. */
+  /** Reserved for extention. */
 
   ALTCOM_SMS_MSG_CHSET_RESERVED
 };

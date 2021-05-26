@@ -1,5 +1,5 @@
 ARCHCFLAGS       = -fno-builtin -mabi=aapcs -ffunction-sections -fdata-sections -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard
-ARCHCXXFLAGS     = -fno-builtin -std=c++11 -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+ARCHCXXFLAGS     = -fno-builtin -fno-exceptions -fno-rtti -std=c++98 -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 ARCHPICFLAGS     = -fpic -msingle-pic-base -mpic-register=r10
 ARCHWARNINGS     = -Wall -Wstrict-prototypes -Wshadow -Wundef
 ARCHWARNINGSXX   = -Wall -Wshadow -Wundef
@@ -16,7 +16,11 @@ STRIP            = arm-none-eabi-strip
 OBJCOPY          = arm-none-eabi-objcopy
 OBJDUMP          = arm-none-eabi-objdump
 NXFLATLDFLAGS1   = -r -d -warn-common
-NXFLATLDFLAGS2   = -r -d -warn-common -T/home/arjan/Documents/EdgeImpulse/Firmware/sony/spresense/nuttx/binfmt/libnxflat/gnu-nxflat-pcrel.ld -no-check-sections
+<<<<<<< HEAD
+NXFLATLDFLAGS2   = -r -d -warn-common -Tspresense/nuttx/binfmt/libnxflat/gnu-nxflat-pcrel.ld -no-check-sections
+=======
+NXFLATLDFLAGS2   = -r -d -warn-common -T/spresense-build/nuttx/binfmt/libnxflat/gnu-nxflat-pcrel.ld -no-check-sections
+>>>>>>> 752c4cd... Change USERMAIN_STACKSIZE to 2048
 OBJEXT           = .o
 LIBEXT           = .a
 EXEEXT           = 
@@ -27,7 +31,11 @@ HOSTLDFLAGS      =
 HOSTEXEEXT       = 
 DIRLINK          = 
 DIRUNLINK        = 
-MKDEP            = /home/arjan/Documents/EdgeImpulse/Firmware/sony/spresense/nuttx/tools/mkdeps
+<<<<<<< HEAD
+MKDEP            = spresense/nuttx/tools/mkdeps
+=======
+MKDEP            = /spresense-build/nuttx/tools/mkdeps
+>>>>>>> 752c4cd... Change USERMAIN_STACKSIZE to 2048
 LDSCRIPT         = ramconfig.ld
 LDFLAGS      = 
 HEAD_OBJ     = 
