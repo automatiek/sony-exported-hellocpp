@@ -44,4 +44,7 @@ set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_LINKER} ${AC_LINKER_FLAGS} -o ${EXE_NAME}
 
 set(BUILD_SHARED_LIBS OFF)
 
+# include_directories(/usr/lib/arm-none-eabi/include/c++/9.2.1)
+# include_directories(/usr/lib/arm-none-eabi/include/c++/9.2.1/arm-none-eabi)
+
 add_subdirectory(src)
