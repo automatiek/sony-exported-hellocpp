@@ -16,11 +16,32 @@ add_custom_command(
         COMMAND ${CMAKE_OBJCOPY} ARGS -S -O binary ${CMAKE_BINARY_DIR}/src/${EXE_NAME}.elf ${CMAKE_BINARY_DIR}/${EXE_NAME}.bin
 )
 
-set(LIBM_CMD "${TOOLCHAIN_PREFIX}-gcc --print-file-name=libm.a")
-execute_process(COMMAND ${LIBM_CMD} OUTPUT_VARIABLE LIBMA)
+set(CFLAGS
+	"-DCONFIG_WCHAR_BUILTIN"
+	"-DCONFIG_HAVE_DOUBLE"
+	"-Dmain=spresense_main"
+	"-D_estack=__stack"
+	"-c"
+	"-pipe"
+	"-std=gnu11"
+	"-mcpu=cortex-m4"
+	"-mthumb"
+	"-mfpu=fpv4-sp-d16"
+	"-mfloat-abi=hard"
+	"-mabi=aapcs"
+	"-fno-builtin"
+	"-fno-strict-aliasing"
+	"-fno-strength-reduce"
+	"-fomit-frame-pointer"
+	"-ffunction-sections"
+	"-fdata-sections"
+	"-Wall")
 
-set(LIBGCC_CMD "${TOOLCHAIN_PREFIX}-gcc --print-libgcc-file-name")
-execute_process(COMMAND ${LIBGCC_CMD} OUTPUT_VARIABLE LIBGCC)
+set(LIBM_CMD "${TOOLCHAIN_PREFIX}-gcc")
+execute_process(COMMAND ${LIBM_CMD} ${CFLAGS} "--print-file-name=libm.a" OUTPUT_VARIABLE LIBMA OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+set(LIBGCC_CMD "${TOOLCHAIN_PREFIX}-gcc")
+execute_process(COMMAND ${LIBGCC_CMD} ${CFLAGS} "--print-libgcc-file-name" OUTPUT_VARIABLE LIBGCC OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 
 target_link_libraries(${EXE_NAME} --start-group)
